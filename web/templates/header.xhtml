@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+            <h:graphicImage library="img" name="logo.png" />
+            <h:form>
+                <p:menubar>
+                    <p:submenu icon="fa fa-laptop" expanded="true" label="Конфигурация">
+                        <p:menuitem value="Мастер проекта" icon="fa fa-laptop" />
+                        <p:menuitem value="Опросный лист" icon="fa fa-list-ul" />
+                        <p:menuitem value="Список устройств" icon="fa fa-tablet" />
+                        <p:menuitem value="Настройки проекта" icon="fa fa-gears" />
+                    </p:submenu>
+                    <p:submenu icon="fa fa-info-circle" label="Информация">
+                        <p:menuitem value="Состояние системы" icon="fa fa-info-circle" />
+                        <p:menuitem value="Документация" icon="fa fa-file-pdf-o" />
+                        <p:menuitem value="Состояние входов" icon="fa fa-sliders" />
+                        <p:menuitem value="Отладка" icon="fa fa-exclamation-circle" />
+                    </p:submenu>
+                    <p:submenu label="Логи" icon="fa fa-book">
+                        <p:menuitem value="Лог данных" icon="fa fa-calendar" />
+                        <p:menuitem value="Лог аварий" icon="fa fa-book" />
+                        <p:menuitem value="Системные логи" icon="fa fa-history" />
+                    </p:submenu>
+                    <p:submenu label="Мониторинг" icon="fa fa-line-chart">
+                        <p:menuitem value="Активные аварии" icon="fa fa-bolt" />
+                        <p:menuitem value="Список устройств" icon="fa fa-tablet" />
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
+    </ui:composition>
+</html>
