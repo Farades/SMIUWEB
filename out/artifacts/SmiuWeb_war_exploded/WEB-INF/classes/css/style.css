@@ -42,20 +42,20 @@ table {
 	border-spacing: 0;
 }
 
-.ui-menuitem-text {
-    margin-left: 10px;
-}
-.ui-layout-north {
-    z-index:20 !important;
-    overflow:visible !important;
-}
+/*.ui-menuitem-text {*/
+    /*margin-left: 10px;*/
+/*}*/
+/*.ui-layout-north {*/
+    /*z-index:20 !important;*/
+    /*overflow:visible !important;*/
+/*}*/
 
-.ui-layout-north .ui-layout-unit-content {
-    overflow:visible !important;
-}
-.ui-menubar {
-    margin-top: 5px;
-}
+/*.ui-layout-north .ui-layout-unit-content {*/
+    /*overflow:visible !important;*/
+/*}*/
+/*.ui-menubar {*/
+    /*margin-top: 5px;*/
+/*}*/
 /*
 body {
     font-family: Verdana, Geneva, sans-serif;
