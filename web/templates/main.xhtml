@@ -19,18 +19,28 @@
 
     <h:body>
         <ui:composition>
-            <p:layout fullPage="true">
+            <!--<p:layout fullPage="true">-->
 
-                <p:layoutUnit position="west" style="width: 160px;" >
+                <!--<p:layoutUnit position="north" size="70">-->
+                    <!--<ui:include src="header.xhtml" />-->
+                <!--</p:layoutUnit>-->
+
+                <!--<p:layoutUnit position="west">-->
+                    <!--<ui:include src="menu.xhtml" />-->
+                <!--</p:layoutUnit>-->
+
+                <!--<p:layoutUnit position="center">-->
+                    <!--<ui:include src="content.xhtml" />-->
+                <!--</p:layoutUnit>-->
+
+            <!--</p:layout>-->
+                <div id="header">
                     <ui:include src="header.xhtml" />
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
-                    <ui:include src="content.xhtml" />
-                </p:layoutUnit>
-
-            </p:layout>
-
+                </div>
+                <div id="menu">
+                    <ui:include src="menu.xhtml" />
+                </div>
+                <div id="center"></div>
         </ui:composition>
     </h:body>
 

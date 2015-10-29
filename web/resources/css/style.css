@@ -23,8 +23,18 @@ article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
 	display: block;
 }
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+    overflow:hidden;
+}
 body {
 	line-height: 1;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
 }
 ol, ul {
 	list-style: none;
@@ -40,6 +50,53 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+#header {
+    height: 50px;
+    margin-bottom: 5px;
+    padding: 5px 5px 0px 5px;
+}
+
+#logo {
+    float: left;
+}
+
+.header-state {
+    float: right;
+    height: 50px;
+    outline: 1px solid red;
+}
+
+#menu {
+    outline: 1px solid #ccc;
+    width: 150px;
+    float: left;
+    height: 100%;
+}
+
+#menu .ui-accordion-content {
+    padding: 0;
+}
+
+#menu .ui-accordion-content ul>li a {
+    display: block;
+    height: 100%;
+    width: 150px;
+    padding: 3px 0px 3px 0px;
+    background: #ccc -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.6)), to(rgba(255,255,255,0)));
+    text-decoration: none;
+}
+
+#menu .ui-accordion-content ul>li a:hover {
+    background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0)), to(rgba(255,255,255,0.4)));
+}
+
+#center {
+    padding: 5px;
+    outline: 1px solid #ccc;
+    margin-left: 160px;
+    height: 100%;
 }
 
 /*.ui-menuitem-text {*/
