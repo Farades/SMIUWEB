@@ -71,6 +71,7 @@ public class DataDealerModel implements MqttCallback, ServletContextListener {
 
         @Override
         public void run() {
+//            System.out.println("DataDealerModel Scheduler");
             MqttService.getInstance().send("smiu/DD/engine/data", "modbus_in.slave1_2");
             MqttService.getInstance().send("smiu/DD/engine/data", "modbus_in.slave1_1");
         }

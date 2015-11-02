@@ -2,19 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<f:view contentType="text/html">
 
-    <ui:composition template="/templates/main.xhtml" >
-        <ui:define name="content">
-            <!--<h:form>-->
-                <!--<h:outputText id="txt_count" value="#{loginController.test}" />-->
-                <!--<p:poll interval="1" update="txt_count" />-->
-            <!--</h:form>-->
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>СМИУ - ENTEL</title>
+            <h:outputStylesheet library="css" name="style.css" />
+        </f:facet>
+    </h:head>
 
-        </ui:define>
-    </ui:composition>
+    <h:body>
+        <div id="main">
+            <div id="header">
+                <ui:include src="/templates/header.xhtml" />
+            </div>
+
+            <h:panelGroup id="content_wrapper" layout="block">
+                <ui:include src="/includes/#{pageController.page}.xhtml" />
+            </h:panelGroup>
+        </div>
+    </h:body>
+
+</f:view>
 </html>

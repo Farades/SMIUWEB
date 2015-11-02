@@ -5,38 +5,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
       xml:lang="en" lang="en">
 
 <ui:composition>
     <h:form>
-        <!--<p:menubar>-->
-        <!--<p:submenu icon="fa fa-laptop" expanded="true" label="Конфигурация">-->
-        <!--<p:menuitem value="Мастер проекта" icon="fa fa-laptop" />-->
-        <!--<p:menuitem value="Опросный лист" icon="fa fa-list-ul" />-->
-        <!--<p:menuitem value="Список устройств" icon="fa fa-tablet" />-->
-        <!--<p:menuitem value="Настройки проекта" icon="fa fa-gears" />-->
-        <!--</p:submenu>-->
-        <!--<p:submenu icon="fa fa-info-circle" label="Информация">-->
-        <!--<p:menuitem value="Состояние системы" icon="fa fa-info-circle" />-->
-        <!--<p:menuitem value="Документация" icon="fa fa-file-pdf-o" />-->
-        <!--<p:menuitem value="Состояние входов" icon="fa fa-sliders" />-->
-        <!--<p:menuitem value="Отладка" icon="fa fa-exclamation-circle" />-->
-        <!--</p:submenu>-->
-        <!--<p:submenu label="Логи" icon="fa fa-book">-->
-        <!--<p:menuitem value="Лог данных" icon="fa fa-calendar" />-->
-        <!--<p:menuitem value="Лог аварий" icon="fa fa-book" />-->
-        <!--<p:menuitem value="Системные логи" icon="fa fa-history" />-->
-        <!--</p:submenu>-->
-        <!--<p:submenu label="Мониторинг" icon="fa fa-line-chart">-->
-        <!--<p:menuitem value="Активные аварии" icon="fa fa-bolt" />-->
-        <!--<p:menuitem value="Список устройств" icon="fa fa-tablet" />-->
-        <!--</p:submenu>-->
-        <!--</p:menubar>-->
         <p:accordionPanel style="font-size: 12px;">
             <p:tab title="Конфигурация">
                 <ul>
                     <li>
-                        <p:commandLink>
+                        <p:commandLink update=":center">
+                            <f:param name="test" value="1"></f:param>
                             <span class="fa-stack">
                                 <i class="fa fa-laptop fa-stack-1x"></i>
                             </span>
@@ -44,7 +23,8 @@
                         </p:commandLink>
                     </li>
                     <li>
-                        <p:commandLink>
+                        <p:commandLink update=":center">
+                            <f:param name="test" value="2"></f:param>
                             <span class="fa-stack">
                                 <i class="fa fa-list-ul fa-stack-1x"></i>
                             </span>
@@ -52,7 +32,8 @@
                         </p:commandLink>
                     </li>
                     <li>
-                        <p:commandLink>
+                        <p:commandLink update=":center">
+                            <f:param name="test" value="3"></f:param>
                             <span class="fa-stack">
                                 <i class="fa fa-tablet fa-stack-1x"></i>
                             </span>
@@ -60,7 +41,8 @@
                         </p:commandLink>
                     </li>
                     <li>
-                        <p:commandLink>
+                        <p:commandLink update=":center">
+                            <f:param name="test" value="4"></f:param>
                             <span class="fa-stack">
                                 <i class="fa fa-gears fa-stack-1x"></i>
                             </span>
@@ -106,8 +88,52 @@
                 </ul>
             </p:tab>
             <p:tab title="Логи">
+                <ul>
+                    <li>
+                        <p:commandLink>
+                            <span class="fa-stack">
+                                <i class="fa fa-calendar fa-stack-1x"></i>
+                            </span>
+                            <h:outputText value="Лог данных" />
+                        </p:commandLink>
+                    </li>
+                    <li>
+                        <p:commandLink>
+                            <span class="fa-stack">
+                                <i class="fa fa-book fa-stack-1x"></i>
+                            </span>
+                            <h:outputText value="Лог аварий" />
+                        </p:commandLink>
+                    </li>
+                    <li>
+                        <p:commandLink>
+                            <span class="fa-stack">
+                                <i class="fa fa-history fa-stack-1x"></i>
+                            </span>
+                            <h:outputText value="Системные логи" />
+                        </p:commandLink>
+                    </li>
+                </ul>
             </p:tab>
             <p:tab title="Мониторинг">
+                <ul>
+                    <li>
+                        <p:commandLink>
+                                <span class="fa-stack">
+                                    <i class="fa fa-bolt fa-stack-1x"></i>
+                                </span>
+                            <h:outputText value="Активные аварии" />
+                        </p:commandLink>
+                    </li>
+                    <li>
+                        <p:commandLink>
+                                <span class="fa-stack">
+                                    <i class="fa fa-tablet fa-stack-1x"></i>
+                                </span>
+                            <h:outputText value="Список устройств" />
+                        </p:commandLink>
+                    </li>
+                </ul>
             </p:tab>
         </p:accordionPanel>
     </h:form>
