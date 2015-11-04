@@ -15,7 +15,7 @@ public class MqttService {
     private static MqttService instance;
 
     /**
-     * QOS - Quality of Service (0, 1, 2)
+     * QOS - Quality of service (0, 1, 2)
      */
     public static final int QOS = 0;
 

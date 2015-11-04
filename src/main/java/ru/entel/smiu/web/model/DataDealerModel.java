@@ -1,13 +1,20 @@
 package ru.entel.smiu.web.model;
 
 
+import javafx.scene.web.WebEngine;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import ru.entel.smiu.web.controllers.AppController;
+import ru.entel.smiu.web.entity.DeviceBlankDAO;
+import ru.entel.smiu.web.entity.Factory;
 import ru.entel.smiu.web.msg.MqttService;
 
+import javax.faces.bean.ManagedProperty;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -16,13 +23,18 @@ import java.util.concurrent.TimeUnit;
 public class DataDealerModel implements MqttCallback, ServletContextListener {
     private ScheduledExecutorService scheduler;
 
+    private final static String DD_OUT_TOPIC = "smiu/DD/engine/out";
     /**
      * Основной объект для работы с MQTT
      */
     private MqttClient client;
 
+    @ManagedProperty(value = "#{appController}")
+    private AppController appController;
+
     public DataDealerModel() {
         mqttInit();
+
     }
 
     private void mqttInit() {
@@ -33,7 +45,7 @@ public class DataDealerModel implements MqttCallback, ServletContextListener {
 
             client.setCallback(this);
             client.connect(connectOptions);
-            client.subscribe("smiu/DD/engine/out", 0);
+            client.subscribe(DD_OUT_TOPIC, 0);
         } catch (MqttException e) {
 //            logger.error("Ошибка в функции mqttInit(): " + e.getMessage());
             e.printStackTrace();
@@ -48,7 +60,9 @@ public class DataDealerModel implements MqttCallback, ServletContextListener {
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        System.out.println(s + " - " + mqttMessage.toString());
+        if (s.equals(DD_OUT_TOPIC)) {
+            appController.setLast(mqttMessage.toString());
+        }
     }
 
     @Override
@@ -72,6 +86,7 @@ public class DataDealerModel implements MqttCallback, ServletContextListener {
         @Override
         public void run() {
 //            System.out.println("DataDealerModel Scheduler");
+
             MqttService.getInstance().send("smiu/DD/engine/data", "modbus_in.slave1_2");
             MqttService.getInstance().send("smiu/DD/engine/data", "modbus_in.slave1_1");
         }

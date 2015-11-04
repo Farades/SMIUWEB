@@ -8,15 +8,6 @@
       xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-    <div id="breadcrumb">
-        <p:breadCrumb>
-            <p:menuitem value="Главная" url="/index.xhtml" />
-            <p:menuitem value="Главная" url="/index.xhtml" />
-        </p:breadCrumb>
-    </div>
-
-    <h:panelGroup id="content" layout="block">
-
         <h:form>
             <ul class="index-content-menu">
                 <f:ajax render=":content">
@@ -59,6 +50,5 @@
                 </f:ajax>
             </ul>
         </h:form>
-    </h:panelGroup>
 </ui:composition>
 </html>

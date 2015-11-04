@@ -1,22 +1,28 @@
 package ru.entel.smiu.web.controllers;
 
+import ru.entel.smiu.web.entity.DeviceBlankDAO;
+import ru.entel.smiu.web.entity.Factory;
+
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.*;
+import javax.faces.context.FacesContext;
+import javax.faces.view.*;
 import java.io.Serializable;
+import java.sql.SQLException;
 
 /**
  * Created by farades on 02.11.15.
  */
 
 @ManagedBean
-@ViewScoped
+@javax.faces.view.ViewScoped
 public class PageController implements Serializable {
     private String page;
 
+
     @PostConstruct
     public void init() {
-        page = "home"; //  Default include.
+        page = "home";
     }
 
     public String getPage() {
@@ -26,5 +32,15 @@ public class PageController implements Serializable {
     public void setPage(String page) {
         this.page = page;
         System.out.println(this.page);
+    }
+
+    public void test() {
+
+        try {
+            System.out.println(Factory.getInstance().getStudentDAO().getAllStudents());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("TEEEEEEEST");
     }
 }

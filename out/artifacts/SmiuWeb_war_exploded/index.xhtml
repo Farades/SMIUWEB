@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <f:view contentType="text/html">
 
@@ -17,12 +17,38 @@
     </h:head>
 
     <h:body>
+        <h:form>
+            <p:growl id="messages" showDetail="true" />
+
+            <p:tree id="docs" value="#{treeNodeModel.root}" var="node" selectionMode="single" selection="#{treeNodeModel.selectedNode}" dynamic="true">
+                <p:treeNode>
+                    <h:outputText value="#{node.name}"/>
+                </p:treeNode>
+            </p:tree>
+
+            <h:commandButton value="test" action="#{pageController.test}" />
+
+            <p:contextMenu for="docs">
+                <p:menuitem value="Изменить" update="messages" actionListener="#{treeNodeModel.displaySelectedSingle}" icon="ui-icon-search" />
+                <p:menuitem value="Удалить" update="docs" actionListener="#{treeNodeModel.deleteNode}" icon="ui-icon-close"/>
+            </p:contextMenu>
+        </h:form>
+
+        <h:outputScript name="js/viewFix.js" target="head" />
         <div id="main">
             <div id="header">
                 <ui:include src="/templates/header.xhtml" />
             </div>
 
-            <h:panelGroup id="content_wrapper" layout="block">
+            <div id="home">
+                <h:form>
+                    <f:ajax render=":content">
+                        <p:commandButton action="#{pageController.setPage('home')}" value="Домой" icon="ui-icon-home" />
+                    </f:ajax>
+                </h:form>
+            </div>
+
+            <h:panelGroup id="content" layout="block">
                 <ui:include src="/includes/#{pageController.page}.xhtml" />
             </h:panelGroup>
         </div>
