@@ -7,20 +7,61 @@
     </database-info>
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
     <schema name="" catalog="smiu"/>
-    <table name="DeviceBlank" schema="" catalog="smiu" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="protocolType" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="deviceType" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+    <table name="device" schema="" catalog="smiu" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="device_settings" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="device_blank_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="protocol_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_device_device_blank1" columns="device_blank_id" ref-table="device_blank" ref-schema="" ref-catalog="smiu" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_device_protocol1" columns="protocol_id" ref-table="protocol" ref-schema="" ref-catalog="smiu" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_tag_device1" table="tag" schema="" catalog="smiu" columns="device_id"/>
+      <index name="idDevice_UNIQUE" unique="true" columns="id"/>
+      <index name="fk_device_device_blank1_idx" unique="false" columns="device_blank_id"/>
+      <index name="fk_device_protocol1_idx" unique="false" columns="protocol_id"/>
+    </table>
+    <table name="device_blank" schema="" catalog="smiu" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="device_type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="protocol_type" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_device_device_blank1" table="device" schema="" catalog="smiu" columns="device_blank_id"/>
+      <exported-key name="fk_tag_blank_device_blank1" table="tag_blank" schema="" catalog="smiu" columns="device_blank_id"/>
+      <index name="deviceType_UNIQUE" unique="true" columns="device_type"/>
       <index name="id_UNIQUE" unique="true" columns="id"/>
     </table>
-    <table name="TagBlank" schema="" catalog="smiu" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="nameId" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
-      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
-      <column name="number" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+    <table name="protocol" schema="" catalog="smiu" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="protocol_settings" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_device_protocol1" table="device" schema="" catalog="smiu" columns="protocol_id"/>
       <index name="id_UNIQUE" unique="true" columns="id"/>
+    </table>
+    <table name="tag" schema="" catalog="smiu" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tag_time" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="tag_blank_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="device_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_tag_device1" columns="device_id" ref-table="device" ref-schema="" ref-catalog="smiu" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_tag_tag_blank1" columns="tag_blank_id" ref-table="tag_blank" ref-schema="" ref-catalog="smiu" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="idTag_UNIQUE" unique="true" columns="id"/>
+      <index name="fk_tag_device1_idx" unique="false" columns="device_id"/>
+      <index name="fk_tag_tag_blank1_idx" unique="false" columns="tag_blank_id"/>
+    </table>
+    <table name="tag_blank" schema="" catalog="smiu" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="tag_descr" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tag_name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="tag_id" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="delay" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="device_blank_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_tag_blank_device_blank1" columns="device_blank_id" ref-table="device_blank" ref-schema="" ref-catalog="smiu" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_tag_tag_blank1" table="tag" schema="" catalog="smiu" columns="tag_blank_id"/>
+      <index name="idTagBlank_UNIQUE" unique="true" columns="id"/>
+      <index name="fk_tag_blank_device_blank1_idx" unique="false" columns="device_blank_id"/>
     </table>
   </data-source>
 </component>

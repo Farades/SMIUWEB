@@ -14,8 +14,8 @@ public class Test implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new UpdateTest(), 0, 1, TimeUnit.SECONDS);
+//        scheduler = Executors.newSingleThreadScheduledExecutor();
+//        scheduler.scheduleAtFixedRate(new UpdateTest(), 0, 1, TimeUnit.SECONDS);
     }
 
     @Override

@@ -1,20 +1,15 @@
 package ru.entel.smiu.web.model;
 
 
-import javafx.scene.web.WebEngine;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import ru.entel.smiu.web.controllers.AppController;
-import ru.entel.smiu.web.entity.DeviceBlankDAO;
-import ru.entel.smiu.web.entity.Factory;
 import ru.entel.smiu.web.msg.MqttService;
 
 import javax.faces.bean.ManagedProperty;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;

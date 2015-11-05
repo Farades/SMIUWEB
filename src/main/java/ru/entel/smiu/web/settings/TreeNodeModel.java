@@ -2,8 +2,6 @@ package ru.entel.smiu.web.settings;
 
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
-import ru.entel.smiu.web.settings.devices.DevModelBoard;
-import ru.entel.smiu.web.settings.service.ProtocolBlank;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -21,10 +19,10 @@ public class TreeNodeModel implements Serializable {
     @PostConstruct
     public void init() {
         root = new DefaultTreeNode();
-
-        TreeNode modbusIn = new DefaultTreeNode(new ProtocolBlank("Modbus_In"), root);
-
-        TreeNode modBoard = new DefaultTreeNode(new DevModelBoard("Modeling board 1"), modbusIn);
+//
+//        TreeNode modbusIn = new DefaultTreeNode(new ProtocolBlank("Modbus_In"), root);
+//
+//        TreeNode modBoard = new DefaultTreeNode(new DevModelBoard("Modeling board 1"), modbusIn);
 
     }
 
