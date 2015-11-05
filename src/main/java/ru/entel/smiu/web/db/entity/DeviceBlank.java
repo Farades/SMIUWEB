@@ -1,16 +1,17 @@
 package ru.entel.smiu.web.db.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Created by farades on 05.11.15.
- */
 @Entity
 @Table(name = "device_blank", schema = "", catalog = "smiu")
 public class DeviceBlank {
     private int id;
     private String deviceType;
     private String protocolType;
+    private Set<TagBlank> tagBlanks = new HashSet<>(0);
+    private Set<Device> devices = new HashSet<>(0);
 
     @Id
     @Column(name = "id")
@@ -40,6 +41,24 @@ public class DeviceBlank {
 
     public void setProtocolType(String protocolType) {
         this.protocolType = protocolType;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "deviceBlank")
+    public Set<TagBlank> getTagBlanks() {
+        return tagBlanks;
+    }
+
+    public void setTagBlanks(Set<TagBlank> tagBlanks) {
+        this.tagBlanks = tagBlanks;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "deviceBlank")
+    public Set<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(Set<Device> devices) {
+        this.devices = devices;
     }
 
     @Override

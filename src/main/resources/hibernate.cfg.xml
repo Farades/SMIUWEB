@@ -17,9 +17,9 @@
     <property name="hbm2ddl.auto">update</property>
 
     <mapping class="ru.entel.smiu.web.db.entity.DeviceBlank" />
-    <!--<mapping class="ru.entel.smiu.web.dbiceEntity" />-->
+    <mapping class="ru.entel.smiu.web.db.entity.Protocol" />
     <mapping class="ru.entel.smiu.web.db.entity.TagBlank" />
-    <!--<mapping class="ru.entel.smiu.web.dbEntity" />-->
-    <!--<mapping class="ru.entel.smiu.web.dbtocolEntity" />-->
+    <mapping class="ru.entel.smiu.web.db.entity.Device" />
+
 </session-factory>
 </hibernate-configuration>

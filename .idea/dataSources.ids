@@ -33,9 +33,11 @@
     <table name="protocol" schema="" catalog="smiu" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="protocol_settings" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <exported-key name="fk_device_protocol1" table="device" schema="" catalog="smiu" columns="protocol_id"/>
       <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="name_UNIQUE" unique="true" columns="name"/>
     </table>
     <table name="tag" schema="" catalog="smiu" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

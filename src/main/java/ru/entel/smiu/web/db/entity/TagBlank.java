@@ -13,6 +13,7 @@ public class TagBlank {
     private String tagName;
     private String tagId;
     private int delay;
+    private DeviceBlank deviceBlank;
 
     @Id
     @Column(name = "id")
@@ -64,6 +65,16 @@ public class TagBlank {
         this.delay = delay;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "device_blank_id")
+    public DeviceBlank getDeviceBlank() {
+        return deviceBlank;
+    }
+
+    public void setDeviceBlank(DeviceBlank deviceBlank) {
+        this.deviceBlank = deviceBlank;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,5 +99,17 @@ public class TagBlank {
         result = 31 * result + (tagId != null ? tagId.hashCode() : 0);
         result = 31 * result + delay;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TagBlank{" +
+                "id=" + id +
+                ", tagDescr='" + tagDescr + '\'' +
+                ", tagName='" + tagName + '\'' +
+                ", tagId='" + tagId + '\'' +
+                ", delay=" + delay +
+                ", deviceBlank=" + deviceBlank +
+                '}';
     }
 }
