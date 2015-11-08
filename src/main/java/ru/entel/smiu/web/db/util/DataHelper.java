@@ -2,7 +2,9 @@ package ru.entel.smiu.web.db.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import ru.entel.smiu.web.db.entity.DeviceBlank;
+import ru.entel.smiu.web.db.entity.Properties;
 import ru.entel.smiu.web.db.entity.Protocol;
 
 import java.util.ArrayList;
@@ -50,4 +52,19 @@ public class DataHelper {
         return res;
     }
 
+    public String getProperty(String prop) {
+        Session session = sessionFactory.openSession();
+        String res = "";
+        try {
+            Properties property = (Properties)session.createCriteria(Properties.class).add(Restrictions.ilike("name", prop)).list().get(0);
+            res = property.getValue();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return res;
+    }
 }

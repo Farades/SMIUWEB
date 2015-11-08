@@ -34,23 +34,54 @@
             </p:contextMenu>
         </h:form>
 
-        <h:outputScript name="js/viewFix.js" target="head" />
         <div id="main">
             <div id="header">
                 <ui:include src="/templates/header.xhtml" />
             </div>
 
-            <div id="home">
-                <h:form>
-                    <f:ajax render=":content">
-                        <p:commandButton action="#{pageController.setPage('home')}" value="Домой" icon="ui-icon-home" />
-                    </f:ajax>
-                </h:form>
-            </div>
+            <ui:include src="templates/home.xhtml" />
 
-            <h:panelGroup id="content" layout="block">
-                <ui:include src="/includes/#{pageController.page}.xhtml" />
-            </h:panelGroup>
+            <h:form>
+                <ul class="index-content-menu">
+                    <li>
+                        <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/test.xhtml">
+                            <h:graphicImage library="img" name="scheme.png" height="40px" />
+                            <h2>Мониторинг</h2>
+                        </h:outputLink>
+                    </li>
+                    <li class="ml10">
+                        <h:commandLink action="#{pageController.setPage('control')}">
+                            <h:graphicImage library="img" name="gpio_1.png" height="40px" />
+                            <h2>Управление</h2>
+                        </h:commandLink>
+                    </li>
+                    <li class="mt10">
+                        <h:commandLink action="#{pageController.setPage('logs')}">
+                            <h:graphicImage library="img" name="log.png" height="40px" />
+                            <h2>Журнал данных</h2>
+                        </h:commandLink>
+                    </li>
+                    <li class="mt10 ml10">
+                        <h:commandLink action="#{pageController.setPage('alarms')}">
+                            <h:graphicImage library="img" name="alert.png" height="40px" />
+                            <h2>Аварии</h2>
+                        </h:commandLink>
+                    </li>
+                    <li class="mt10">
+                        <h:commandLink action="#{pageController.setPage('extra')}">
+                            <h:graphicImage library="img" name="more_info.png" height="40px" />
+                            <h2>Дополнительно</h2>
+                        </h:commandLink>
+                    </li>
+                    <li class="mt10 ml10">
+                        <h:commandLink action="#{pageController.setPage('settings')}">
+                            <h:graphicImage library="img" name="settings_1.png" height="40px" />
+                            <h2>Настройки</h2>
+                        </h:commandLink>
+                    </li>
+                </ul>
+            </h:form>
+
         </div>
     </h:body>
 

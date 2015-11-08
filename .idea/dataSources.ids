@@ -12,11 +12,13 @@
       <column name="device_settings" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="device_blank_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="protocol_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="fk_device_device_blank1" columns="device_blank_id" ref-table="device_blank" ref-schema="" ref-catalog="smiu" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="fk_device_protocol1" columns="protocol_id" ref-table="protocol" ref-schema="" ref-catalog="smiu" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="fk_tag_device1" table="tag" schema="" catalog="smiu" columns="device_id"/>
       <index name="idDevice_UNIQUE" unique="true" columns="id"/>
+      <index name="name_UNIQUE" unique="true" columns="name"/>
       <index name="fk_device_device_blank1_idx" unique="false" columns="device_blank_id"/>
       <index name="fk_device_protocol1_idx" unique="false" columns="protocol_id"/>
     </table>
@@ -29,6 +31,14 @@
       <exported-key name="fk_tag_blank_device_blank1" table="tag_blank" schema="" catalog="smiu" columns="device_blank_id"/>
       <index name="deviceType_UNIQUE" unique="true" columns="device_type"/>
       <index name="id_UNIQUE" unique="true" columns="id"/>
+    </table>
+    <table name="properties" schema="" catalog="smiu" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="value" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="name_UNIQUE" unique="true" columns="name"/>
     </table>
     <table name="protocol" schema="" catalog="smiu" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

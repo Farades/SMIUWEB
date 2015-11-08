@@ -83,7 +83,6 @@ public class Protocol {
                 "id=" + id +
                 ", protocolSettings='" + protocolSettings + '\'' +
                 ", name='" + name + '\'' +
-                ", devices=" + devices +
                 '}';
     }
 }
