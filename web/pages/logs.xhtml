@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Entel СМИУ</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+        <div class="main">
+            <ui:include src="/templates/header.xhtml" />
+            <div class="content">
+                <div class="content_title">
+                    <h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml" styleClass="btn back">
+                        <h:graphicImage library="img" name="back.png" height="15px" />
+                        вернуться
+                    </h:outputLink>
+                    <h1>Лог данных</h1>
+                </div>
+                <div class="select_date">
+                    <h:form>
+                        <p:outputLabel for="event" value="Выберите дату:" />
+                        <p:calendar id="event" value="#{logsController.logsDate}" locale="ru">
+                            <p:ajax event="dateSelect" listener="#{logsController.dateSelect}" update=":exceptions" />
+                        </p:calendar>
+                    </h:form>
+                </div>
+                <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt10">
+                    <h:form>
+                        <p:dataTable id="tbl" var="log" value="#{logsController.logsModel}" lazy="true"
+                                     paginatorTemplate="{AlarmCount} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     paginator="true" rows="30" rowsPerPageTemplate="30, 50, 100"
+                                     scrollable="true" scrollHeight="245">
+                            
+                            <f:facet name="{AlarmCount}">
+                                <span class="paginator-totalCount">Всего: #{logsController.dataLogsSize}</span>
+                            </f:facet>
+                            <f:facet name="{Exporters}">
+                                <h:commandLink>
+                                    <h:graphicImage library="img" name="excel.png" height="22px" style="vertical-align: middle;" />
+                                    <p:dataExporter type="xls" target="tbl" fileName="#{logsController.dataLogsFileName}" />
+                                </h:commandLink>
+                            </f:facet>
+                            
+                            <p:column
+                                style="width: 70px; text-align: center;">
+                                <f:facet name="header">
+                                    <h:outputText value="Время" />
+                                </f:facet>
+                                <h:outputText value="#{log.time}" >
+                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column
+                                style="width: 200px;">
+                                <f:facet name="header">
+                                    <h:outputText value="Устройство" />
+                                </f:facet>
+                                <h:outputText value="#{log.device}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Значения" />
+                                </f:facet>
+                                <h:outputText value="#{log.data}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </h:panelGroup>
+            </div>
+        </div>
+    </h:body>
+</html>

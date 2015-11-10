@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Entel СМИУ</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+        <div class="main">
+            <ui:insert name="header">
+                <ui:include src="/templates/header.xhtml" />
+            </ui:insert>
+            <div class="content">
+                <ui:insert name="content_title">
+                    <ui:include src="/templates/content_title.xhtml" />
+                </ui:insert>
+                    
+
+                <h:form>
+                    <p:poll interval="1" listener="#{deviceController.updateDevice()}" update=":values" />
+                </h:form>
+                <h:panelGroup id="values" layout="block">
+                    <ul class="value_group">
+                        <li>
+                            <h2>Фазные напряжения</h2>
+                            <table>
+                                <tr><td class="al_right">Ua:</td><td>#{deviceController.getCurrentDeviceValueByName("Ua")}</td></tr>
+                                <tr><td class="al_right">Ub:</td><td>#{deviceController.getCurrentDeviceValueByName("Ub")}</td></tr>
+                                <tr><td class="al_right">Uc:</td><td>#{deviceController.getCurrentDeviceValueByName("Uc")}</td></tr>
+                            </table>
+                        </li>
+                        <li class="ml20">
+                            <h2>Разное</h2>
+                            <table>
+                                <tr><td class="al_right">F:</td><td>#{deviceController.getCurrentDeviceValueByName("F")}</td></tr>
+                            </table>
+                        </li>
+                        <div style="clear: both;"></div>
+                    </ul>
+                </h:panelGroup>
+            </div>
+        </div>
+    </h:body>
+</html>

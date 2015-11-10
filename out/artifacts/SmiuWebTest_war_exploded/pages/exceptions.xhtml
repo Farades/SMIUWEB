@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Entel СМИУ</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+        <div class="main">
+            <ui:insert name="header">
+                <ui:include src="/templates/header.xhtml" />
+            </ui:insert>
+            <div class="content">
+                <div class="content_title">
+                    <h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml" styleClass="btn back">
+                        <h:graphicImage library="img" name="back.png" height="15px" />
+                        вернуться
+                    </h:outputLink>
+                    <h:outputLink styleClass="btn history_link" value="#{facesContext.externalContext.request.contextPath}/pages/ex_history.xhtml">История</h:outputLink>
+                    <h1 style="color: red;">Текущие аварии</h1>
+                    
+                    <h:form>
+                        <p:poll interval="1" update=":exceptions" />
+                    </h:form>
+                    <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt20">
+                        <c:if test="#{not empty deviceController.allActiveExceptions.keySet().toArray()}">
+                            <h:form>
+                                <p:dataTable var="device" value="#{deviceController.allActiveExceptions.entrySet().toArray()}"
+                                             scrollable="true" scrollHeight="330">
+                                    <p:columnGroup type="header">
+                                        <p:row>
+                                            <p:column headerText="Время возникновения" />
+                                            <p:column headerText="Описание" />
+                                            <p:column headerText="Текущее значение" />
+                                        </p:row>
+                                    </p:columnGroup>
+                                    <p:subTable var="exception" value="#{device.value.toArray()}">
+                                        <f:facet name="header">
+                                            <p:column styleClass="active_ex-table-subtale-header">
+                                                <h:outputText value="#{device.key}" />  
+                                            </p:column>
+                                         </f:facet> 
+                                        <p:column>
+                                            <h:outputText value="#{exception.time_start}" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{exception.description}" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{exception.currentValue}" />
+                                        </p:column>
+                                    </p:subTable>
+                                </p:dataTable>
+                            </h:form>
+                        </c:if>
+                        <c:if test="#{empty deviceController.allActiveExceptions.keySet().toArray()}">
+                            <p style="font-weight: bold; text-align: center; font-size: 16px;">Все измеряемые параметры системы находятся в допустимых пределах.</p>
+                        </c:if>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
