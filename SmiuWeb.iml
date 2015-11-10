@@ -40,6 +40,7 @@
     <orderEntry type="library" exported="" name="PrimeFaces-5.2" level="project" />
     <orderEntry type="library" exported="" name="PrimeFaces-5.2" level="project" />
     <orderEntry type="library" exported="" name="Hibernate 4.2.2-4.2.2" level="project" />
+    <orderEntry type="library" name="DataDealer" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.36" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.paho:mqtt:1.0.2" level="project" />
@@ -54,5 +55,8 @@
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.common:hibernate-commons-annotations:5.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.rxtx:rxtx:2.2" level="project" />
+    <orderEntry type="library" name="Maven: j2mod:j2mod:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: mbassy:mbassador:1.2.4" level="project" />
   </component>
 </module>

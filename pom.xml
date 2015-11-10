@@ -34,7 +34,23 @@
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.rxtx</groupId>
+            <artifactId>rxtx</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>j2mod</groupId>
+            <artifactId>j2mod</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>mbassy</groupId>
+            <artifactId>mbassador</artifactId>
+            <version>1.2.4</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
