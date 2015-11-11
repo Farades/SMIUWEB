@@ -11,7 +11,7 @@
         <!--<property name="hibernate.current_session_context_class">thread</property>-->
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">qwplzx123</property>
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
 
         <mapping class="ru.entel.smiu.web.db.entity.Properties"/>
         <mapping class="ru.entel.smiu.web.db.entity.DeviceBlank"/>

@@ -37,10 +37,10 @@
                         </h:commandLink>
                     </li>
                     <li class="mt10">
-                        <h:commandLink action="#{pageController.setPage('logs')}">
+                        <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/logs.xhtml">
                             <h:graphicImage library="img" name="log.png" height="40px" />
                             <h2>Журнал данных</h2>
-                        </h:commandLink>
+                        </h:outputLink>
                     </li>
                     <li class="mt10 ml10">
                         <h:commandLink action="#{pageController.setPage('alarms')}">

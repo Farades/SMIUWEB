@@ -144,6 +144,7 @@ public class Engine implements MqttCallback {
             ds = null;
             timer = null;
         }
+        logger.debug("Data Dealer stopping.");
     }
 
     /**
