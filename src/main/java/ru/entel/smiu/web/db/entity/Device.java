@@ -1,6 +1,7 @@
 package ru.entel.smiu.web.db.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -8,13 +9,14 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "device", schema = "", catalog = "smiu")
-public class Device {
+public class Device implements Serializable {
     private int id;
     private String deviceSettings;
     private String name;
     private Protocol protocol;
     private DeviceBlank deviceBlank;
     private Set<Tag> tags;
+    private Integer selectId;
 
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
@@ -73,6 +75,15 @@ public class Device {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    @Transient
+    public int getSelectId() {
+        return selectId;
+    }
+
+    public void setSelectId(int selectId) {
+        this.selectId = selectId;
     }
 
     @Override

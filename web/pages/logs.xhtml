@@ -23,28 +23,25 @@
 
             <ui:include src="../templates/home.xhtml" />
 
-            <div class="logs-selectors">
-                <h:form>
-                    <p:selectOneMenu value="#{logsController.logsDevice}" >
-                        <p:ajax listener="#{logsController.deviceSelect}" update=":exceptions"  />
-                        <f:selectItems value="#{logsController.devices}" var="device"
-                                       itemLabel="#{device.name}" itemValue="#{device}" />
-                    </p:selectOneMenu>
-                </h:form>
-                <h:form>
-                    <p:selectOneMenu value="#{logsController.logsTag}" >
-                        <p:ajax listener="#{logsController.tagSelect}" update=":exceptions"  />
-                        <f:selectItems value="#{logsController.tagBlanks}" var="tagBlank"
-                                       itemLabel="#{tagBlank.tagDescr}" itemValue="#{tagBlank}" />
-                    </p:selectOneMenu>
-                </h:form>
+            <h:panelGroup id="logs-selectors" layout="block">
                 <h:form>
                     <p:outputLabel for="event" value="Выберите дату:" />
                     <p:calendar id="event" value="#{logsController.logsDate}" locale="ru">
                         <p:ajax event="dateSelect" listener="#{logsController.dateSelect}" update=":exceptions" />
                     </p:calendar>
+
+                    <p:selectOneMenu value="#{logsController.logsDevice}" converter="deviceConverter">
+                        <p:ajax event="change" update=":exceptions :logs-selectors" listener="#{logsController.deviceSelect}" />
+                        <f:selectItems value="#{logsController.devices}" var="device" itemLabel="#{device.name}" itemValue="#{device}" />
+                    </p:selectOneMenu>
+
+                    <p:selectOneMenu value="#{logsController.logsTag}" converter="tagBlankConverter">
+                        <p:ajax event="change" update=":exceptions" listener="#{logsController.tagSelect}" />
+                        <f:selectItems value="#{logsController.tagBlanks}" var="tag" itemLabel="#{tag.tagDescr}" itemValue="#{tag}" />
+                    </p:selectOneMenu>
                 </h:form>
-            </div>
+            </h:panelGroup>
+
             <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt10">
                 <h:form>
                     <p:dataTable var="tag" value="#{logsController.logsModel}" lazy="true"
@@ -53,7 +50,7 @@
                                  paginatorTemplate="{AlarmCount} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                             >
                         <f:facet name="{AlarmCount}">
-                            <span class="paginator-totalCount">Всего: #{logsController.dataLogsSizeByDate}</span>
+                            <span class="paginator-totalCount">Всего: #{logsController.dataLogsSize}</span>
                         </f:facet>
                         <f:facet name="{Exporters}">
                             <h:commandLink>
@@ -71,6 +68,14 @@
 
                         <p:column headerText="Значение">
                             <h:outputText value="#{tag.value}" />
+                        </p:column>
+
+                        <p:column headerText="Device">
+                            <h:outputText value="#{tag.device.id}" />
+                        </p:column>
+
+                        <p:column headerText="Tag">
+                            <h:outputText value="#{tag.tagBlank.id}" />
                         </p:column>
 
                     </p:dataTable>

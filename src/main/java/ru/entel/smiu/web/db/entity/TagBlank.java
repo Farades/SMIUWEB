@@ -17,6 +17,17 @@ public class TagBlank {
     private DeviceBlank deviceBlank;
     private Set<Tag> tags;
 
+    private Integer selectedId;
+
+    @Transient
+    public Integer getSelectedId() {
+        return selectedId;
+    }
+
+    public void setSelectedId(Integer selectedId) {
+        this.selectedId = selectedId;
+    }
+
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getId() {

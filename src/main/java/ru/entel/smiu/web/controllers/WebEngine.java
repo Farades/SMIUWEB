@@ -7,6 +7,7 @@ import ru.entel.smiu.datadealer.protocols.service.ProtocolSlave;
 import ru.entel.smiu.web.db.entity.Device;
 import ru.entel.smiu.web.devices.WebDevice;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.lang.reflect.Field;
@@ -22,15 +23,17 @@ public class WebEngine {
     private Map<Device, WebDevice> allDevices = new HashMap<>();
 
     public WebEngine() {
-        System.out.println("--------WebEngine Start----------");
+
+//        engine.run();
+    }
+
+    @PostConstruct
+    private void init() {
+        System.out.println("--------WebEngine Start 222----------");
         initNativeLib();
         engine = new Engine();
         engine.configure();
-//        engine.run();
-        init();
-    }
 
-    private void init() {
         for (ProtocolMaster master : engine.getProtocolMasterMap().values()) {
             for (ProtocolSlave slave : master.getSlaves().values()) {
                 if (allDevices.containsKey(slave.getDevice())) {

@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import ru.entel.smiu.web.db.entity.Device;
 import ru.entel.smiu.web.db.entity.Protocol;
 import ru.entel.smiu.web.db.entity.Tag;
+import ru.entel.smiu.web.db.entity.TagBlank;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,13 +52,14 @@ public class DataHelper {
 //    }
 
 
-    public synchronized List<Tag> getTagsByDate(Date date, int first, int pageSize) {
+    public synchronized List<Tag> getTagsByDate(Device device, TagBlank tagBlank, Date date, int first, int pageSize) {
         Session session = getSession();
         List<Tag> res = new ArrayList<>(0);
         try {
-            //TODO
-            //Исправить баг с дупликатами
-            Criteria criteria = session.createCriteria(Tag.class).addOrder(Order.desc("id"));
+            Criteria criteria = session.createCriteria(Tag.class, "t").addOrder(Order.desc("id"));
+//            criteria.add(Restrictions.eq("t.tagBlank.id", tagBlank.getId()));
+//            criteria.add(Restrictions.eq("t.device.id", device.getId()));
+//            criteria.add(Restrictions.eq("t.tagTime", date));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             criteria.setFirstResult(first);
             criteria.setMaxResults(pageSize);
@@ -125,6 +127,19 @@ public class DataHelper {
             }
         }
         return res;
+    }
+
+    public synchronized void clearTags() {
+        Session session = getSession();
+        try {
+            session.createSQLQuery("truncate table tag").executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     public synchronized void saveTag(Tag tag) {
