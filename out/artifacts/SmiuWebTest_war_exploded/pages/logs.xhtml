@@ -23,7 +23,21 @@
 
             <ui:include src="../templates/home.xhtml" />
 
-            <div class="select_date">
+            <div class="logs-selectors">
+                <h:form>
+                    <p:selectOneMenu value="#{logsController.logsDevice}" >
+                        <p:ajax listener="#{logsController.deviceSelect}" update=":exceptions"  />
+                        <f:selectItems value="#{logsController.devices}" var="device"
+                                       itemLabel="#{device.name}" itemValue="#{device}" />
+                    </p:selectOneMenu>
+                </h:form>
+                <h:form>
+                    <p:selectOneMenu value="#{logsController.logsTag}" >
+                        <p:ajax listener="#{logsController.tagSelect}" update=":exceptions"  />
+                        <f:selectItems value="#{logsController.tagBlanks}" var="tagBlank"
+                                       itemLabel="#{tagBlank.tagDescr}" itemValue="#{tagBlank}" />
+                    </p:selectOneMenu>
+                </h:form>
                 <h:form>
                     <p:outputLabel for="event" value="Выберите дату:" />
                     <p:calendar id="event" value="#{logsController.logsDate}" locale="ru">
@@ -31,14 +45,6 @@
                     </p:calendar>
                 </h:form>
             </div>
-            <h:form>
-                <p:selectOneMenu value="#{logsController.logsDevice}" >
-                    <p:ajax listener="#{logsController.deviceSelect}" update=":exceptions"  />
-                    <f:selectItems value="#{logsController.devices}" var="device"
-                                   itemLabel="#{device.name}" itemValue="#{device}" />
-                </p:selectOneMenu>
-            </h:form>
-
             <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt10">
                 <h:form>
                     <p:dataTable var="tag" value="#{logsController.logsModel}" lazy="true"

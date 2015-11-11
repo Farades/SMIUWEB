@@ -5,6 +5,7 @@ import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import ru.entel.smiu.web.db.entity.Device;
 import ru.entel.smiu.web.db.entity.Tag;
+import ru.entel.smiu.web.db.entity.TagBlank;
 import ru.entel.smiu.web.db.util.DataHelper;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.swing.event.ChangeEvent;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +24,7 @@ import java.util.Map;
 public class LogsController {
     private Date logsDate;
     private Device logsDevice;
+    private TagBlank logsTag;
     private List<Device> devices;
     private LazyDataModel logsModel;
 
@@ -35,10 +38,15 @@ public class LogsController {
         };
     }
 
+    public void setLogsTag(TagBlank logsTag) {
+        this.logsTag = logsTag;
+    }
+
     @PostConstruct
     public void init() {
         this.logsDate = new Date();
         this.devices = DataHelper.getInstance().getAllDevices();
+        this.logsDevice = devices.get(0);
     }
 
     public List<Device> getDevices() {
@@ -49,7 +57,11 @@ public class LogsController {
         return logsDevice;
     }
 
-
+    public List<TagBlank> getTagBlanks() {
+        List<TagBlank> res = new ArrayList<>();
+        res.addAll(logsDevice.getDeviceBlank().getTagBlanks());
+        return res;
+    }
 
     public void setLogsDevice(Device logsDevice) {
         this.logsDevice = logsDevice;
@@ -61,6 +73,14 @@ public class LogsController {
 
     public void deviceSelect() {
         System.out.println("Logs Device: " + logsDevice);
+    }
+
+    public TagBlank getLogsTag() {
+        return logsTag;
+    }
+
+    public void tagSelect() {
+
     }
 
     public void dateSelect(SelectEvent event) {

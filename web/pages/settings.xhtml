@@ -22,15 +22,13 @@
 
             <ui:include src="../templates/home.xhtml" />
 
-            <div>
-                <h:form>
-                    <h2>Управление опросом устройств</h2>
-                    <p:inputSwitch value="#{webEngine.dataEngineStatus}">
-                        <p:ajax listener="#{webEngine.changeDataEngineStatus()}" update=":header" />
-                    </p:inputSwitch>
-                </h:form>
-                <div style="clear: both;"></div>
-            </div>
+            <h:form>
+                <h2>Управление опросом устройств</h2>
+                <p:inputSwitch value="#{webEngine.dataEngineStatus}">
+                    <p:ajax listener="#{webEngine.changeDataEngineStatus()}" update=":header" />
+                </p:inputSwitch>
+            </h:form>
+
         </div>
     </h:body>
 

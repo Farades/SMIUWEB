@@ -1,34 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+
     <h:head>
-        <title>Entel СМИУ</title>
-        <h:outputStylesheet library="css" name="style.css" />
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>СМИУ - ENTEL</title>
+            <h:outputStylesheet library="css" name="style.css" />
+        </f:facet>
     </h:head>
+
     <h:body>
-        <div class="main">
-            <ui:insert name="header">
+        <div id="main">
+            <div id="header">
                 <ui:include src="/templates/header.xhtml" />
-            </ui:insert>
-            <div class="content">
-                <div class="content_title">
-                    <h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml" styleClass="btn back">
-                        <h:graphicImage library="img" name="back.png" height="15px" />
-                        вернуться
-                    </h:outputLink>
-                    <h1>Дополнительная информация</h1>
-                </div>
-                <div class="block">
-                    <h2></h2>
-                    <ul>
-                        <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/docs.xhtml"><h:graphicImage library="img" name="docs.png" height="30px" />Документация</h:outputLink></li>
-                        <div style="clear: both;"></div>
-                    </ul>
-                </div>
             </div>
+
+            <ui:include src="../templates/home.xhtml" />
+
         </div>
     </h:body>
+
+</f:view>
 </html>
+
