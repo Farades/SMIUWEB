@@ -165,9 +165,9 @@ table {
 
 #home a {
     display: block;
-    height: 25px;
+    height: 23px;
     font-size: 20px;
-    width: 780px;
+    width: 778px;
     font-weight: bold;
     color: #295F61;
     font-family: Arial;
@@ -188,6 +188,24 @@ table {
     background: #56c483 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
 }
 
+#logs-selectors {
+    margin-top: 10px;
+    height: 30px;
+}
+
+#logs-selectors div {
+    float: left;
+}
+
+.logs-selectors-date input {
+    height: 20px;
+}
+
+.new-select-style select {
+    height: 30px;
+    font-size: 18px;
+}
+
 #content {
     height: 380px;
     margin-top: 10px;
@@ -198,7 +216,7 @@ table {
 }
 
 .index-content-menu>li {
-    width: 381px;
+    width: 383px;
     display: block;
     float: left;
     height: 105px;

@@ -25,20 +25,25 @@
 
             <h:panelGroup id="logs-selectors" layout="block">
                 <h:form>
-                    <p:outputLabel for="event" value="Выберите дату:" />
-                    <p:calendar id="event" value="#{logsController.logsDate}" locale="ru">
-                        <p:ajax event="dateSelect" listener="#{logsController.dateSelect}" update=":exceptions" />
-                    </p:calendar>
+                    <div class="logs-selectors-date">
+                        <p:calendar id="event" value="#{logsController.logsDate}" locale="ru">
+                            <p:ajax event="dateSelect" listener="#{logsController.dateSelect}" update=":exceptions" />
+                        </p:calendar>
+                    </div>
+                    <div class="new-select-style ml10">
+                        <h:selectOneMenu value="#{logsController.logsDevice}" converter="deviceConverter">
+                            <p:ajax event="change" update=":exceptions :logs-selectors" listener="#{logsController.deviceSelect}" />
+                            <f:selectItems value="#{logsController.devices}" var="device" itemLabel="#{device.name}" itemValue="#{device}" />
+                        </h:selectOneMenu>
+                    </div>
 
-                    <p:selectOneMenu value="#{logsController.logsDevice}" converter="deviceConverter">
-                        <p:ajax event="change" update=":exceptions :logs-selectors" listener="#{logsController.deviceSelect}" />
-                        <f:selectItems value="#{logsController.devices}" var="device" itemLabel="#{device.name}" itemValue="#{device}" />
-                    </p:selectOneMenu>
+                    <div class="new-select-style ml10">
+                        <h:selectOneMenu value="#{logsController.logsTag}" converter="tagBlankConverter">
+                            <p:ajax event="change" update=":exceptions" listener="#{logsController.tagSelect}" />
+                            <f:selectItems value="#{logsController.tagBlanks}" var="tag" itemLabel="#{tag.tagDescr}" itemValue="#{tag}" />
+                        </h:selectOneMenu>
+                    </div>
 
-                    <p:selectOneMenu value="#{logsController.logsTag}" converter="tagBlankConverter">
-                        <p:ajax event="change" update=":exceptions" listener="#{logsController.tagSelect}" />
-                        <f:selectItems value="#{logsController.tagBlanks}" var="tag" itemLabel="#{tag.tagDescr}" itemValue="#{tag}" />
-                    </p:selectOneMenu>
                 </h:form>
             </h:panelGroup>
 

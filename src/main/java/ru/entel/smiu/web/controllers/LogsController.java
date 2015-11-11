@@ -116,11 +116,11 @@ public class LogsController{
 
     public List<Tag> getDataLogs(int first, int pageSize) {
 //        System.out.println("getDataLogs size: " + DataHelper.getInstance().getTagsByDate(this.logsDate, first, pageSize).size());
-        return DataHelper.getInstance().getTagsByDate(this.logsDevice, this.logsTag, this.logsDate, first, pageSize);
+        return DataHelper.getInstance().getTagsByCriteria(this.logsDevice, this.logsTag, this.logsDate, first, pageSize);
     }
 
     public Long getDataLogsSize() {
-        return DataHelper.getInstance().getLogsSizeByDate(logsDate);
+        return DataHelper.getInstance().getLogsSizeByCriteria(this.logsDevice, this.logsTag, this.logsDate);
     }
 
     public String getDataLogsFileName() {

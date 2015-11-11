@@ -13,6 +13,7 @@ import ru.entel.smiu.web.db.entity.Tag;
 import ru.entel.smiu.web.db.entity.TagBlank;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -52,14 +53,25 @@ public class DataHelper {
 //    }
 
 
-    public synchronized List<Tag> getTagsByDate(Device device, TagBlank tagBlank, Date date, int first, int pageSize) {
+    public synchronized List<Tag> getTagsByCriteria(Device device, TagBlank tagBlank, Date date, int first, int pageSize) {
         Session session = getSession();
         List<Tag> res = new ArrayList<>(0);
         try {
             Criteria criteria = session.createCriteria(Tag.class, "t").addOrder(Order.desc("id"));
-//            criteria.add(Restrictions.eq("t.tagBlank.id", tagBlank.getId()));
-//            criteria.add(Restrictions.eq("t.device.id", device.getId()));
-//            criteria.add(Restrictions.eq("t.tagTime", date));
+            criteria.add(Restrictions.eq("t.tagBlank.id", tagBlank.getId()));
+            criteria.add(Restrictions.eq("t.device.id", device.getId()));
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            date =  cal.getTime();
+            Date tomorrow = new Date(date.getTime() + (1000 * 60 * 60 * 24) - 1);
+
+            criteria.add(Restrictions.between("tagTime", date, tomorrow));
+
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             criteria.setFirstResult(first);
             criteria.setMaxResults(pageSize);
@@ -74,13 +86,28 @@ public class DataHelper {
         return res;
     }
 
-    public synchronized Long getLogsSizeByDate(Date date) {
+    public synchronized Long getLogsSizeByCriteria(Device device, TagBlank tagBlank, Date date) {
         Session session = getSession();
         Long res = new Long(0);
         try {
-            //TODO
-            //Исправить баг с дупликатами
-            res = (Long) session.createCriteria(Tag.class).setProjection(Projections.rowCount()).uniqueResult();
+            Criteria criteria = session.createCriteria(Tag.class, "t").addOrder(Order.desc("id"));
+            criteria.add(Restrictions.eq("t.tagBlank.id", tagBlank.getId()));
+            criteria.add(Restrictions.eq("t.device.id", device.getId()));
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            date =  cal.getTime();
+            Date tomorrow = new Date(date.getTime() + (1000 * 60 * 60 * 24) - 1);
+
+            criteria.add(Restrictions.between("tagTime", date, tomorrow));
+
+            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+
+            res = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
