@@ -3,15 +3,20 @@ package ru.entel.smiu.web.devices;
 import ru.entel.smiu.datadealer.protocols.service.ProtocolSlave;
 import ru.entel.smiu.web.db.entity.Device;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebDevice {
+public class WebDevice implements Serializable {
     private Map<String, ProtocolSlave> channels = new HashMap<>();
     private Device device;
 
     public WebDevice(Device device) {
         this.device = device;
+    }
+
+    public Device getDevice() {
+        return device;
     }
 
     public void addChannel(ProtocolSlave channel) {

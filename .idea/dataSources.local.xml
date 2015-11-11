@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - smiu" uuid="aa0ea0df-75fb-40a2-995a-e524332d98bc">
+    <data-source name="MySQL - smiu@localhost" uuid="6caf6aa9-6d9d-4e7e-a862-557d0d924d13">
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
       <schema-pattern>smiu.*</schema-pattern>

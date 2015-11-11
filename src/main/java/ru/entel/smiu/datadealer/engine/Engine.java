@@ -103,7 +103,7 @@ public class Engine implements MqttCallback {
      */
     public void run() {
         try {
-            configure();
+//            configure();
             for (ProtocolMaster pm : protocolMasterMap.values()) {
                 new Thread(pm, pm.getName()).start();
                 logger.debug(pm.getName() + " started");
@@ -111,7 +111,7 @@ public class Engine implements MqttCallback {
 
             timer = new Timer();
             ds = new DataSaver(protocolMasterMap);
-            timer.schedule(ds, 1000, 5000);
+            timer.schedule(ds, 5000, 5000);
 
             logger.debug("Data Dealer running.");
         } catch (RuntimeException ex) {

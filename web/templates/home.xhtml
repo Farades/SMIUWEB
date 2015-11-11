@@ -7,16 +7,14 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-        <h:outputStylesheet library="css" name="style_main.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
     </h:head>
     <h:body>
         <ui:composition>
-            <div class="content_title">
-                <h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml" styleClass="btn back">
-                    <h:graphicImage library="img" name="back.png" height="15px" />
-                    вернуться
+            <div id="home">
+                <h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml">
+                    Домой
                 </h:outputLink>
-                <h1>#{deviceController.currentDevice.name}</h1>
             </div>
         </ui:composition>
     </h:body>

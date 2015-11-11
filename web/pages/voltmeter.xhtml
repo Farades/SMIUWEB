@@ -15,7 +15,7 @@
             </ui:insert>
             <div class="content">
                 <ui:insert name="content_title">
-                    <ui:include src="/templates/content_title.xhtml" />
+                    <ui:include src="/templates/content_title.home.xhtml" />
                 </ui:insert>
                     
 
@@ -38,8 +38,9 @@
                                 <tr><td class="al_right">F:</td><td>#{deviceController.getCurrentDeviceValueByName("F")}</td></tr>
                             </table>
                         </li>
-                        <div style="clear: both;"></div>
+
                     </ul>
+                    <div style="clear: both;"></div>
                 </h:panelGroup>
             </div>
         </div>

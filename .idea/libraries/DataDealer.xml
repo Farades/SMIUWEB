@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="DataDealer">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/DataDealer.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

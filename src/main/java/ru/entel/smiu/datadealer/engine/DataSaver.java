@@ -27,7 +27,7 @@ public class DataSaver extends TimerTask {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         Date start = new Date();
 
         Session session = DataHelper.getInstance().getSession();
@@ -43,7 +43,7 @@ public class DataSaver extends TimerTask {
                     tag.setTagTime(new Date());
                     tag.setDevice(protocolSlave.getDevice());
                     tag.setTagBlank(protocolSlave.getTagBlank());
-//                    tag.setValue(protocolSlave.getData().toString());
+                    tag.setValue(protocolSlave.getData().toString());
 
                     session.save(tag);
                     if (count % 20 == 0 ) { //20, same as the JDBC batch size

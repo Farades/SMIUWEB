@@ -8,18 +8,29 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
-        <h:outputStylesheet library="css" name="style_main.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
     </h:head>
     <h:body>
         <ui:composition>
-            <h:panelGroup id="header" layout="block" class="header">
-                <div class="obj_name">#{appController.objName}</div>
-                <div class="time_temp">
-                    <p><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></p>
-                    <p><span style="font-weight: bold;">Темп.:</span> 24&deg;C&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">Статус:</span>&nbsp;<h:graphicImage library="img" name="#{appController.strEngineStatus}" height="16px" /></p>
+            <h:panelGroup id="header" layout="block" styleClass="header">
+                <div class="logo"><h:graphicImage library="img" name="logo.png" height="49px" width="170px" /></div>
+                <div class="header-last_event">
+                    <div class="header-last_event-header">Последнее событие</div>
+                    <p>ИБП 1.1: Превышено входное напряжение. Тест тест</p>
                 </div>
-                <div class="logo"><h:outputLink value="http://entel.su" target="_blank"><h:graphicImage library="img" name="logo.png" height="49px" width="170px" /></h:outputLink></div>
-            </h:panelGroup>        
+                <div class="header-clock">
+                    <p><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></p>
+                </div>
+                <div class="header-status">
+                    Статус: 0
+                </div>
+
+                <!--<div class="time_temp">-->
+                <!---->
+                <!--<p><span style="font-weight: bold;">Темп.:</span> 24&deg;C&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">Статус:</span>&nbsp;<h:graphicImage library="img" name="#{appController.strEngineStatus}" height="16px" /></p>-->
+                <!--</div>-->
+
+            </h:panelGroup>
         </ui:composition>
     </h:body>
 </html>

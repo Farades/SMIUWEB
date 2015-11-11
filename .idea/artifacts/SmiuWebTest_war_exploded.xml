@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SmiuWebTest:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/SmiuWebTest_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SmiuWebTest/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SmiuWebTest" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Hibernate 4.2.2-4.2.2" />
+          <element id="library" level="project" name="PrimeFaces-5.2" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.3.1" />
+          <element id="library" level="project" name="Maven: j2mod:j2mod:1.0.3" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.36" />
+          <element id="library" level="project" name="Maven: mbassy:mbassador:1.2.4" />
+          <element id="library" level="project" name="Maven: org.eclipse.paho:mqtt:1.0.2" />
+          <element id="library" level="project" name="Maven: org.rxtx:rxtx:2.2" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

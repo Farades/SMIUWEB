@@ -11,9 +11,14 @@ import ru.entel.smiu.datadealer.protocols.modbus.rtu.master.ModbusMaster;
 import ru.entel.smiu.datadealer.protocols.modbus.rtu.master.ModbusMasterParams;
 import ru.entel.smiu.datadealer.protocols.modbus.rtu.master.ModbusSlaveParams;
 import ru.entel.smiu.datadealer.protocols.modbus.rtu.master.ModbusSlaveRead;
+import ru.entel.smiu.datadealer.protocols.modbus_test.ModbusTestMaster;
+import ru.entel.smiu.datadealer.protocols.modbus_test.ModbusTestSlave;
+import ru.entel.smiu.datadealer.protocols.modbus_test.ModbusTestSlaveParams;
 import ru.entel.smiu.datadealer.protocols.registers.RegType;
 import ru.entel.smiu.datadealer.protocols.service.InvalidProtocolTypeException;
 import ru.entel.smiu.datadealer.protocols.service.ProtocolMaster;
+import ru.entel.smiu.datadealer.protocols.service.ProtocolMasterParams;
+import ru.entel.smiu.datadealer.protocols.service.ProtocolSlaveParams;
 import ru.entel.smiu.datadealer.utils.InvalidJSONException;
 import ru.entel.smiu.datadealer.utils.JSONNaturalDeserializer;
 import ru.entel.smiu.datadealer.utils.JSONUtils;
@@ -78,15 +83,15 @@ public class Configurator implements MqttCallback {
             Map protocolParams = (Map) gson.fromJson(jsonConfig, Object.class);
 
             switch (protocol.getType()) {
-                case "MODBUS_RTU_MASTER":
+                case "MODBUS_RTU_MASTER": {
                     String masterName = protocol.getName();
                     String portName = (String) protocolParams.get("portName");
                     String encoding = "rtu";
                     String parity = (String) protocolParams.get("parity");
-                    int baudRate      = ((Double)protocolParams.get("baudRate")).intValue();
-                    int databits      = ((Double)protocolParams.get("databits")).intValue();
-                    int stopbits      = ((Double)protocolParams.get("stopbits")).intValue();
-                    int timePause     = ((Double)protocolParams.get("timePause")).intValue();
+                    int baudRate = ((Double) protocolParams.get("baudRate")).intValue();
+                    int databits = ((Double) protocolParams.get("databits")).intValue();
+                    int stopbits = ((Double) protocolParams.get("stopbits")).intValue();
+                    int timePause = ((Double) protocolParams.get("timePause")).intValue();
                     boolean echo = false;
 
                     ModbusMasterParams masterParams = new ModbusMasterParams(portName, baudRate, databits, parity,
@@ -100,16 +105,16 @@ public class Configurator implements MqttCallback {
 
                         Map slaveParams = (Map) gson.fromJson(jsonDevConf, Object.class);
 
-                        int unitID = ((Double)slaveParams.get("unitId")).intValue();
+                        int unitID = ((Double) slaveParams.get("unitId")).intValue();
                         DeviceBlank deviceBlank = device.getDeviceBlank();
                         for (TagBlank tagBlank : deviceBlank.getTagBlanks()) {
-                            String tagParams[]    = tagBlank.getTagId().split(":");
+                            String tagParams[] = tagBlank.getTagId().split(":");
                             ModbusFunction mbFunc = ModbusFunction.valueOf(String.valueOf(tagParams[0]));
-                            RegType regType       = RegType.valueOf(String.valueOf(tagParams[1]));
-                            int offset            = Integer.valueOf(tagParams[2]);
-                            int length            = 1;
-                            int transDelay        = tagBlank.getDelay();
-                            String slaveName      = tagBlank.getTagName();
+                            RegType regType = RegType.valueOf(String.valueOf(tagParams[1]));
+                            int offset = Integer.valueOf(tagParams[2]);
+                            int length = 1;
+                            int transDelay = tagBlank.getDelay();
+                            String slaveName = tagBlank.getTagName();
 
                             ModbusSlaveParams sp = new ModbusSlaveParams(unitID, mbFunc, regType, offset,
                                     length, transDelay);
@@ -119,7 +124,23 @@ public class Configurator implements MqttCallback {
                     }
                     res.put(masterName, master);
                     break;
-
+                }
+                case "MODBUS_TEST": {
+                    String protocolName = protocol.getName();
+                    ProtocolMasterParams masterParams = null;
+                    ModbusTestMaster testMaster = new ModbusTestMaster(protocolName, masterParams);
+                    for (Device device : protocol.getDevices()) {
+                        DeviceBlank deviceBlank = device.getDeviceBlank();
+                        for (TagBlank tagBlank : deviceBlank.getTagBlanks()) {
+                            String slaveName = tagBlank.getTagName();
+                            ModbusTestSlaveParams sp = new ModbusTestSlaveParams();
+                            testMaster.addSlave(new ModbusTestSlave(slaveName, sp, device, tagBlank));
+                        }
+                    }
+                    System.out.println();
+                    res.put(protocolName, testMaster);
+                    break;
+                }
                 default:
                     throw new InvalidProtocolTypeException("Invalid protocol type - " + protocol.getType());
             }

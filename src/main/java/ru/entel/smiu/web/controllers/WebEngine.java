@@ -17,6 +17,7 @@ import java.util.Map;
 @ApplicationScoped
 public class WebEngine {
     private Engine engine;
+    private boolean dataEngineStatus = false;
 
     private Map<Device, WebDevice> allDevices = new HashMap<>();
 
@@ -25,6 +26,7 @@ public class WebEngine {
         initNativeLib();
         engine = new Engine();
         engine.configure();
+//        engine.run();
         init();
     }
 
@@ -56,6 +58,22 @@ public class WebEngine {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    public void changeDataEngineStatus() {
+        if (dataEngineStatus == true) {
+            engine.run();
+        } else {
+            engine.stopEngine();
+        }
+    }
+
+    public boolean isDataEngineStatus() {
+        return dataEngineStatus;
+    }
+
+    public void setDataEngineStatus(boolean dataEngineStatus) {
+        this.dataEngineStatus = dataEngineStatus;
     }
 
     public Map<Device, WebDevice> getAllDevices() {
