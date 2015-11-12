@@ -8,9 +8,9 @@
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/smiu</property>
-        <!--<property name="hibernate.current_session_context_class">thread</property>-->
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">qwplzx123</property>
+        <!--<property name="hibernate.current_session_context_class">thread</property>-->
         <property name="show_sql">false</property>
 
         <mapping class="ru.entel.smiu.web.db.entity.Properties"/>
@@ -20,6 +20,7 @@
         <mapping class="ru.entel.smiu.web.db.entity.Device"/>
         <mapping class="ru.entel.smiu.web.db.entity.TagBlank"/>
         <mapping class="ru.entel.smiu.web.db.entity.Tag"/>
+        <mapping class="ru.entel.smiu.web.db.entity.AlarmBlank"/>
 
     </session-factory>
 </hibernate-configuration>

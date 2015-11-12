@@ -78,7 +78,9 @@ public class Engine implements MqttCallback {
     private List<Device> devices;
 
     private DataSaver ds;
-    private Timer timer;
+    private AlarmsChecker alarmsChecker;
+    private Timer dataSaverTimer;
+    private Timer alarmsCheckerTimer;
 
     /**
      * Объект, занимающийся конфигурированием словаря protocolMasterMap. Получает данные от MQTT сервера.
@@ -109,9 +111,13 @@ public class Engine implements MqttCallback {
                 logger.debug(pm.getName() + " started");
             }
 
-            timer = new Timer();
+            dataSaverTimer = new Timer();
             ds = new DataSaver(protocolMasterMap);
-            timer.schedule(ds, 5000, 5000);
+            dataSaverTimer.schedule(ds, 5000, 5000);
+
+            alarmsCheckerTimer = new Timer();
+            alarmsChecker = new AlarmsChecker(this);
+            alarmsCheckerTimer.schedule(alarmsChecker, 3000, 1000);
 
             logger.debug("Data Dealer running.");
         } catch (RuntimeException ex) {
@@ -123,7 +129,7 @@ public class Engine implements MqttCallback {
     public void configure() {
         try {
             protocolMasterMap = configurator.getProtocolMasters();
-
+            System.out.println();
         } catch (InvalidProtocolTypeException | InvalidJSONException e) {
             logger.error("Ошибка при создании ProtocolMaster'ов в конфигураторе: " + e.getMessage());
             e.printStackTrace();
@@ -138,11 +144,18 @@ public class Engine implements MqttCallback {
             protocolMasterMap.forEach((k, v) -> v.stopInterview());
             protocolMasterMap = null;
         }
-        if (ds != null && timer != null) {
-            timer.cancel();
-            timer.purge();
+        if (ds != null && dataSaverTimer != null) {
+            dataSaverTimer.cancel();
+            dataSaverTimer.purge();
             ds = null;
-            timer = null;
+            dataSaverTimer = null;
+        }
+
+        if (alarmsChecker != null && alarmsCheckerTimer != null) {
+            alarmsCheckerTimer.cancel();
+            alarmsCheckerTimer.purge();
+            alarmsChecker = null;
+            alarmsCheckerTimer = null;
         }
         logger.debug("Data Dealer stopping.");
     }
@@ -164,6 +177,10 @@ public class Engine implements MqttCallback {
             logger.error("Ошибка в функции mqttInit(): " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public AlarmsChecker getAlarmsChecker() {
+        return alarmsChecker;
     }
 
     public DDPacket sendDataByDevID(String devID) {

@@ -16,6 +16,7 @@ public class TagBlank {
     private int delay;
     private DeviceBlank deviceBlank;
     private Set<Tag> tags;
+    private Set<AlarmBlank> alarmBlanks;
 
     private Integer selectedId;
 
@@ -95,6 +96,15 @@ public class TagBlank {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tagBlank")
+    public Set<AlarmBlank> getAlarmBlanks() {
+        return alarmBlanks;
+    }
+
+    public void setAlarmBlanks(Set<AlarmBlank> alarmBlanks) {
+        this.alarmBlanks = alarmBlanks;
     }
 
     @Override

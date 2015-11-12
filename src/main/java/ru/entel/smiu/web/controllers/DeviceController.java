@@ -1,5 +1,6 @@
 package ru.entel.smiu.web.controllers;
 
+import ru.entel.smiu.datadealer.engine.Alarm;
 import ru.entel.smiu.web.db.entity.Device;
 import ru.entel.smiu.web.devices.WebDevice;
 
@@ -10,6 +11,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @ManagedBean
 @ApplicationScoped
@@ -36,6 +38,10 @@ public class DeviceController {
         for (Map.Entry<Device, WebDevice> entry : allDevices.entrySet()) {
             allDevicesByName.put(entry.getKey().getName(), entry.getValue());
         }
+    }
+
+    public Map<Device, Set<Alarm>> getActiveAlarms() {
+        return webEngine.getEngine().getAlarmsChecker().getActiveAlarms();
     }
 
     public String selectDevice() {

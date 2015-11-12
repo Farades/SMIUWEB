@@ -17,6 +17,7 @@ public class Device implements Serializable {
     private DeviceBlank deviceBlank;
     private Set<Tag> tags;
     private Integer selectId;
+    private String deviceSystemName;
 
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
@@ -46,6 +47,16 @@ public class Device implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Basic
+    @Column(name = "device_system_name", nullable = false, length = 45)
+    public String getDeviceSystemName() {
+        return deviceSystemName;
+    }
+
+    public void setDeviceSystemName(String deviceSystemName) {
+        this.deviceSystemName = deviceSystemName;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
