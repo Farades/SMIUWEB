@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view contentType="text/html">
+
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>СМИУ - ENTEL</title>
+            <h:outputStylesheet library="css" name="style.css" />
+        </f:facet>
+    </h:head>
+
+    <h:body>
+        <div id="main">
+            <div id="header">
+                <ui:include src="/templates/header.xhtml" />
+            </div>
+
+            <ui:include src="templates/home.xhtml" />
+
+            <div id="content">
+                <h:form>
+                    <ul class="index-content-menu">
+                        <li>
+                            <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/monitoring.xhtml">
+                                <h:graphicImage library="img" name="scheme.png" height="40px" />
+                                <h2>Мониторинг</h2>
+                            </h:outputLink>
+                        </li>
+                        <li class="ml10">
+                            <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/monitoring.xhtml">
+                                <h:graphicImage library="img" name="gpio_1.png" height="40px" />
+                                <h2>Управление</h2>
+                            </h:outputLink>
+                        </li>
+                        <li class="mt10">
+                            <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/logs.xhtml">
+                                <h:graphicImage library="img" name="log.png" height="40px" />
+                                <h2>Журнал данных</h2>
+                            </h:outputLink>
+                        </li>
+                        <li class="mt10 ml10">
+                            <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/alarms_active.xhtml">
+                                <h:graphicImage library="img" name="alert.png" height="40px" />
+                                <h2>Аварии</h2>
+                            </h:outputLink>
+                        </li>
+                        <li class="mt10">
+                            <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/more_info.xhtml">
+                                <h:graphicImage library="img" name="more_info.png" height="40px" />
+                                <h2>Дополнительно</h2>
+                            </h:outputLink>
+                        </li>
+                        <li class="mt10 ml10">
+                            <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/settings.xhtml">
+                                <h:graphicImage library="img" name="settings_1.png" height="40px" />
+                                <h2>Настройки</h2>
+                            </h:outputLink>
+                        </li>
+                    </ul>
+                </h:form>
+            </div>
+
+        </div>
+    </h:body>
+
+</f:view>
+</html>
+

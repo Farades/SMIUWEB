@@ -28,7 +28,6 @@
             </h:form>
             <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt20">
                 <c:if test="#{not empty deviceController.activeAlarms.keySet().toArray()}">
-                    <p:scrollPanel mode="native" style="width:778px;height: 330px;">
                         <h:form>
                             <p:dataTable var="device" value="#{deviceController.activeAlarms.entrySet().toArray()}">
                                 <p:columnGroup type="header">
@@ -48,7 +47,6 @@
                                 </p:subTable>
                             </p:dataTable>
                         </h:form>
-                    </p:scrollPanel>
                 </c:if>
                 <c:if test="#{empty deviceController.activeAlarms.keySet().toArray()}">
                     <p style="font-weight: bold; text-align: center; font-size: 16px;">Все измеряемые параметры системы находятся в допустимых пределах.</p>

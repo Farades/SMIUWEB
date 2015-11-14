@@ -34,6 +34,10 @@ public class DeviceController {
 
     @PostConstruct
     public void init () {
+        updateDevices();
+    }
+
+    public void updateDevices() {
         this.allDevices = webEngine.getAllDevices();
         for (Map.Entry<Device, WebDevice> entry : allDevices.entrySet()) {
             allDevicesByName.put(entry.getKey().getName(), entry.getValue());
@@ -80,6 +84,7 @@ public class DeviceController {
     }
 
     public Map<String, WebDevice> getAllDevicesByName() {
+        updateDevices();
         return allDevicesByName;
     }
 }

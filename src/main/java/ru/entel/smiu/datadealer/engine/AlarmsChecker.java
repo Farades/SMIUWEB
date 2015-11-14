@@ -36,7 +36,6 @@ public class AlarmsChecker extends TimerTask {
                         if (res == true) {
                             deviceAlarms.add(new Alarm(alarmBlank));
                         }
-                        System.out.println("Value: " + slave.getData() + ". Res " + res);
                     } catch (ScriptException ex) {
                         ex.printStackTrace();
                     }
@@ -47,7 +46,6 @@ public class AlarmsChecker extends TimerTask {
                 }
             }
         }
-        System.out.println(activeAlarms);
     }
 
     public Map<Device, Set<Alarm>> getActiveAlarms() {

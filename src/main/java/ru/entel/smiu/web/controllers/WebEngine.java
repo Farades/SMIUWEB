@@ -10,6 +10,7 @@ import ru.entel.smiu.web.devices.WebDevice;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,29 +25,16 @@ public class WebEngine {
 
     public WebEngine() {
 
-//        engine.run();
     }
 
     @PostConstruct
     private void init() {
-        System.out.println("--------WebEngine Start 222----------");
         initNativeLib();
         engine = new Engine();
         engine.configure();
 
-        for (ProtocolMaster master : engine.getProtocolMasterMap().values()) {
-            for (ProtocolSlave slave : master.getSlaves().values()) {
-                if (allDevices.containsKey(slave.getDevice())) {
-                    WebDevice webDevice = allDevices.get(slave.getDevice());
-                    webDevice.addChannel(slave);
-                } else {
-                    WebDevice webDevice = new WebDevice(slave.getDevice());
-                    webDevice.addChannel(slave);
-                    allDevices.put(slave.getDevice(), webDevice);
-                }
-            }
-        }
-        System.out.println("---------------------------------------");
+        initDevices();
+
         System.out.println(allDevices);
     }
 
@@ -61,6 +49,28 @@ public class WebEngine {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initDevices() {
+        allDevices.clear();
+        for (ProtocolMaster master : engine.getProtocolMasterMap().values()) {
+            for (ProtocolSlave slave : master.getSlaves().values()) {
+                if (allDevices.containsKey(slave.getDevice())) {
+                    WebDevice webDevice = allDevices.get(slave.getDevice());
+                    webDevice.addChannel(slave);
+                } else {
+                    WebDevice webDevice = new WebDevice(slave.getDevice());
+                    webDevice.addChannel(slave);
+                    allDevices.put(slave.getDevice(), webDevice);
+                }
+            }
+        }
+    }
+
+    public void reConfigure() {
+        this.engine.reConfigure();
+        this.dataEngineStatus = false;
+        initDevices();
     }
 
     public void changeDataEngineStatus() {

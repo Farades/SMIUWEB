@@ -129,7 +129,6 @@ public class Engine implements MqttCallback {
     public void configure() {
         try {
             protocolMasterMap = configurator.getProtocolMasters();
-            System.out.println();
         } catch (InvalidProtocolTypeException | InvalidJSONException e) {
             logger.error("Ошибка при создании ProtocolMaster'ов в конфигураторе: " + e.getMessage());
             e.printStackTrace();
@@ -140,6 +139,26 @@ public class Engine implements MqttCallback {
      * Остановка опроса всех ProtocolMaster'ов
      */
     public void stopEngine() {
+        if (ds != null && dataSaverTimer != null) {
+            dataSaverTimer.cancel();
+            dataSaverTimer.purge();
+            ds = null;
+            dataSaverTimer = null;
+        }
+
+        if (alarmsChecker != null && alarmsCheckerTimer != null) {
+            alarmsCheckerTimer.cancel();
+            alarmsCheckerTimer.purge();
+            alarmsChecker = null;
+            alarmsCheckerTimer = null;
+        }
+        if (protocolMasterMap != null) {
+            protocolMasterMap.forEach((k, v) -> v.stopInterview());
+        }
+        logger.debug("Data Dealer stopping.");
+    }
+
+    public void reConfigure() {
         if (protocolMasterMap != null) {
             protocolMasterMap.forEach((k, v) -> v.stopInterview());
             protocolMasterMap = null;
@@ -157,7 +176,8 @@ public class Engine implements MqttCallback {
             alarmsChecker = null;
             alarmsCheckerTimer = null;
         }
-        logger.debug("Data Dealer stopping.");
+        configure();
+        logger.debug("Data Dealer reconfigure.");
     }
 
     /**

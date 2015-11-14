@@ -27,6 +27,7 @@
                 <p:inputSwitch value="#{webEngine.dataEngineStatus}">
                     <p:ajax listener="#{webEngine.changeDataEngineStatus()}" update=":header" />
                 </p:inputSwitch>
+                <p:commandButton value="Реконфигурация" actionListener="#{webEngine.reConfigure}" />
             </h:form>
 
             <h:form>
